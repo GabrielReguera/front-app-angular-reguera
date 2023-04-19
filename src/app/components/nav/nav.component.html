@@ -1,7 +1,12 @@
-<mat-sidenav-container>
-    <mat-sidenav #drawer>Start</mat-sidenav>
+<mat-sidenav-container class="example-container">
+    <mat-sidenav #drawer class="example-sidenav" mode="over">
+        <h2>Home</h2>
+    </mat-sidenav>
     <mat-sidenav-content>
-        
-        <button mat-button (click)="drawer.toggle()"></button>
+        <app-header></app-header>
+        <button class="button-drawer" mat-button (click)="drawer.toggle()">
+            <i class="material-icons">menu</i>
+        </button>
+        <router-outlet></router-outlet>
     </mat-sidenav-content>
 </mat-sidenav-container>
