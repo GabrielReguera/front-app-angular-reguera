@@ -3,10 +3,7 @@
         <h2>Home</h2>
     </mat-sidenav>
     <mat-sidenav-content>
-        <app-header></app-header>
-        <button class="button-drawer" mat-button (click)="drawer.toggle()">
-            <i class="material-icons">menu</i>
-        </button>
+        <app-header (change)="drawer.toggle()"></app-header>
         <router-outlet></router-outlet>
     </mat-sidenav-content>
 </mat-sidenav-container>

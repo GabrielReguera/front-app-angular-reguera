@@ -7,7 +7,13 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class HeaderComponent {
 
-  toggle(){
+  @Output() change: EventEmitter<any> = new EventEmitter<any>()
+
+
+  toggle() {
+    this.change.emit(null)
+  }
+  onOpen(){
     
   }
 }
