@@ -10,13 +10,16 @@ import { MatButtonModule } from "@angular/material/button";
 import { HomeComponent } from './components/home/home.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { HeaderComponent } from './components/header/header.component';
+import { AddCustomerComponent } from './components/add-customer/add-customer.component';
+import { MatInputModule } from "@angular/material/input"
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    AddCustomerComponent
   ],
   imports: [
     BrowserModule,
@@ -25,6 +28,7 @@ import { HeaderComponent } from './components/header/header.component';
     MatSidenavModule,
     MatButtonModule,
     MatToolbarModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
