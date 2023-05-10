@@ -1,6 +1,6 @@
 <mat-sidenav-container class="example-container">
     <mat-sidenav #drawer class="example-sidenav" mode="over">
-        <h2>Home</h2>
+        <h2 routerLink="home">Home</h2>
     </mat-sidenav>
     <mat-sidenav-content>
         <app-header (change)="drawer.toggle()"></app-header>

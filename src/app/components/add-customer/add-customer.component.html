@@ -1,30 +1,33 @@
 <div class="container">
-    <mat-form-field class="full-width">
-        <mat-label>Primeiro Nome: </mat-label>
-        <input type="text" matInput placeholder="Digite seu primeiro nome" />
-    </mat-form-field>
-    <mat-form-field class="full-width">
-        <mat-label>Último Nome: </mat-label>
-        <input type="text" matInput placeholder="Digite seu último nome" />
-    </mat-form-field>
-    <mat-form-field class="full-width">
-        <mat-label>CPF: </mat-label>
-        <input type="text" matInput placeholder="Digite seu CPF" />
-    </mat-form-field>
-    <mat-form-field class="full-width">
-        <mat-label>Data de Nascimento: </mat-label>
-        <input type="date" matInput placeholder="Digite sua data de nascimento" />
-    </mat-form-field>
-    <mat-form-field class="full-width">
-        <mat-label>Renda Mensal: R$ </mat-label>
-        <input type="number" matInput placeholder="Digite sua renda mensal (R$)" />
-    </mat-form-field>
-    <mat-form-field class="full-width">
-        <mat-label>Email: </mat-label>
-        <input type="email" matInput placeholder="Digite seu email" />
-    </mat-form-field>
-    <mat-form-field class="full-width">
-        <mat-label>Senha: </mat-label>
-        <input type="password" matInput placeholder="Digite sua senha" />
-    </mat-form-field>
+    <form class="form" [formGroup]="form" #formDirective="ngForm">
+        <mat-form-field class="full-width">
+            <mat-label>Primeiro Nome: </mat-label>
+            <input type="text" formControlName="firstName" matInput placeholder="Digite seu primeiro nome" />
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label>Último Nome: </mat-label>
+            <input type="text" formControlName="lastName" matInput placeholder="Digite seu último nome" />
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label>CPF: </mat-label>
+            <input type="text" formControlName="cpf" matInput placeholder="Digite seu CPF" />
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label>Data de Nascimento: </mat-label>
+            <input type="date" formControlName="birthDate" matInput placeholder="Digite sua data de nascimento" />
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label>Renda Mensal: R$ </mat-label>
+            <input type="number" formControlName="monthlyIncome" matInput placeholder="Digite sua renda mensal (R$)" />
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label>Email: </mat-label>
+            <input type="email" formControlName="email" matInput placeholder="Digite seu email" />
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label>Senha: </mat-label>
+            <input type="password" formControlName="password" matInput placeholder="Digite sua senha" />
+        </mat-form-field>
+        <button type="submit" (click)="saveCustomer(formDirective)" mat-raised-button color="primary">Salvar</button>
+    </form>
 </div>

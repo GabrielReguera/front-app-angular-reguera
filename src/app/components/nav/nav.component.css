@@ -12,3 +12,7 @@
 .button-drawer{
     min-width: auto;
 }
+
+h2{
+    cursor: pointer;
+}

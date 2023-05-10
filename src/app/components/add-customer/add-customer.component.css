@@ -1,6 +1,25 @@
-.container{
+.container {
+    padding: 5rem 10rem 0 10rem;
+}
+
+.form{
     display: flex;
-    justify-content: center;
+    flex-wrap: wrap;
     align-items: center;
-    padding-block: 2rem;
+    gap: 2rem;
+}
+
+mat-form-field {
+    flex: 1 0 44%;
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled){
+    background-color: #fff;
+}
+
+button{
+    float: right;
+    width: 10rem;
+    height: 2.4rem !important;
+    flex: 0 1 24%;;
 }
