@@ -1,8 +1,10 @@
 import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
+import { Observable, map } from 'rxjs';
 import { CustomerService } from 'src/app/services/customer.service';
-import { Customer } from '../model/customer';
+import { Customer } from '../../model/customer';
 
 @Component({
   selector: 'app-add-customer',
@@ -10,6 +12,9 @@ import { Customer } from '../model/customer';
   styleUrls: ['./add-customer.component.css']
 })
 export class AddCustomerComponent {
+
+  displayedColumns: string[] = ['id', 'name', 'email', 'cpf', 'birthDate', 'monthlyIncome', 'status', 'acoes'];
+  dataSource?: Observable<MatTableDataSource<Customer>>
 
   form: FormGroup = this.fb.group({
     firstName: ['', Validators.required],
@@ -25,10 +30,19 @@ export class AddCustomerComponent {
   constructor(private customerService: CustomerService,
     private fb: FormBuilder,
   ) {
+    this.loadCustomer()
+  }
+
+  loadCustomer() {
+    this.dataSource = this.customerService.getCustomers().pipe(
+      map(rs => {
+        const data = new MatTableDataSource(rs)
+        return data
+      })
+    )
   }
 
   saveCustomer(formDirective: FormGroupDirective) {
-    console.log(this.form.value)
     if (this.form.invalid) { return }
     const datePipe = new DatePipe('en-US')
     const customer: Customer = this.form.value
@@ -41,4 +55,24 @@ export class AddCustomerComponent {
       complete: () => formDirective.resetForm()
     })
   }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource = this.dataSource?.pipe(map(r => {
+      r.filter = filterValue.trim().toLowerCase()
+      return r
+    }))
+
+  }
+
+  editCustomer(customer: Customer) {
+
+  }
+
+  deleteCustomer(id: number) {
+    this.customerService.deleteCustomer(id).subscribe()
+    this.loadCustomer()
+    alert('Deletado com sucesso')
+  }
+
 }

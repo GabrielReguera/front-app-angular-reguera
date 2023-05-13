@@ -23,3 +23,15 @@ button{
     height: 2.4rem !important;
     flex: 0 1 24%;;
 }
+
+.table{
+    padding-block: 3rem;
+}
+
+.actions{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    height: 3.25rem;
+    width: 10rem;
+}

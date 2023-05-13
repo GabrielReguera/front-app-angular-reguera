@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from "@angular/material/button";
 import { MatInputModule } from "@angular/material/input";
 import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
@@ -34,6 +35,7 @@ import { NavComponent } from './components/nav/nav.component';
     MatInputModule,
     HttpClientModule,
     ReactiveFormsModule,
+    MatTableModule,
     FormsModule,
     NgxMaskDirective,
     NgxMaskPipe
