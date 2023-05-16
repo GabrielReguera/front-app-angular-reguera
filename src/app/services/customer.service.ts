@@ -24,6 +24,10 @@ export class CustomerService {
     return this.http.get<Customer>(`${API_CONFIG.url}/find/${idCustomer}`)
   }
 
+  editCustomer(customer: Customer): Observable<Customer> {
+    return this.http.put<Customer>(`${API_CONFIG.url}/update`, customer)
+  }
+
   deleteCustomer(idCustomer: number) {
     return this.http.delete<Customer>(`${API_CONFIG.url}/delete/${idCustomer}`)
   }

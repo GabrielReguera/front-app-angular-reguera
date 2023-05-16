@@ -28,7 +28,8 @@
             <mat-label>Senha: </mat-label>
             <input type="password" formControlName="password" matInput placeholder="Digite sua senha" />
         </mat-form-field>
-        <button type="submit" (click)="saveCustomer(formDirective)" mat-raised-button color="primary">Salvar</button>
+        <button *ngIf="!editando" type="submit" (click)="saveCustomer(formDirective)" mat-raised-button color="primary">Salvar</button>
+        <button *ngIf="editando" type="submit" (click)="editCustomer(formDirective)" mat-raised-button color="primary">Editar</button>
     </form>
 
     <div class="table">
@@ -77,7 +78,7 @@
             <ng-container matColumnDef="acoes">
                 <th mat-header-cell *matHeaderCellDef> Actions </th>
                 <td class="actions" mat-cell *matCellDef="let row">
-                    <button mat-raised-button (click)="editCustomer(row)" color="primary">
+                    <button mat-raised-button (click)="carregarCustomer(row)" color="primary">
                         <i class="material-icons">edit</i>
                     </button>
                     <button mat-raised-button (click)="deleteCustomer(row.id)" color="warn">

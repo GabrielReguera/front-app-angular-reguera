@@ -16,7 +16,10 @@ export class AddCustomerComponent {
   displayedColumns: string[] = ['id', 'name', 'email', 'cpf', 'birthDate', 'monthlyIncome', 'status', 'acoes'];
   dataSource?: Observable<MatTableDataSource<Customer>>
 
+  editando!: boolean
+
   form: FormGroup = this.fb.group({
+    id: [null],
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     cpf: ['', Validators.required],
@@ -52,7 +55,10 @@ export class AddCustomerComponent {
     this.customerService.saveCustomer(customer).subscribe({
       next: () => alert('sucesso'),
       error: e => console.log(e.error.messages),
-      complete: () => formDirective.resetForm()
+      complete: () => {
+        formDirective.resetForm()
+        this.loadCustomer()
+      }
     })
   }
 
@@ -65,8 +71,28 @@ export class AddCustomerComponent {
 
   }
 
-  editCustomer(customer: Customer) {
+  carregarCustomer(customer: Customer) {
+    this.form.patchValue({
+      id: customer.id,
+      firstName: customer.firstName,
+      lastName: customer.lastName,
+      cpf: customer.cpf,
+      birthDate: new Date(customer.birthDate),
+      monthlyIncome: customer.monthlyIncome,
+      status: customer.status,
+      email: customer.email,
+      password: customer.password
+    });
 
+    this.form.get('password')?.disable()
+    this.editando = true
+  }
+
+  editCustomer(formDirective: FormGroupDirective) {
+    this.form.get('password')?.enable()
+    this.customerService.editCustomer(this.form.value).subscribe(() => formDirective.resetForm())
+    this.loadCustomer()
+    alert('Atualizado com sucesso')
   }
 
   deleteCustomer(id: number) {
