@@ -54,9 +54,10 @@ export class AddCustomerComponent {
 
     this.customerService.saveCustomer(customer).subscribe({
       next: () => alert('sucesso'),
-      error: e => console.log(e.error.messages),
+      error: e => alert('CPF ou E-mail Repitidos'),
       complete: () => {
         formDirective.resetForm()
+        this.form.get('status')?.setValue(true)
         this.loadCustomer()
       }
     })
