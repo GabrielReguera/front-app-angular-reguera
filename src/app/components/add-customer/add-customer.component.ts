@@ -1,10 +1,12 @@
 import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable, map } from 'rxjs';
 import { CustomerService } from 'src/app/services/customer.service';
 import { Customer } from '../../model/customer';
+import { DialogConfirmComponent } from '../dialog-confirm/dialog-confirm.component';
 
 @Component({
   selector: 'app-add-customer',
@@ -32,6 +34,7 @@ export class AddCustomerComponent {
 
   constructor(private customerService: CustomerService,
     private fb: FormBuilder,
+    private dialog: MatDialog
   ) {
     this.loadCustomer()
   }
@@ -49,7 +52,6 @@ export class AddCustomerComponent {
     if (this.form.invalid) { return }
     const datePipe = new DatePipe('en-US')
     const customer: Customer = this.form.value
-
     customer.birthDate = datePipe.transform(customer.birthDate, 'dd/MM/yyyy')!
 
     this.customerService.saveCustomer(customer).subscribe({
@@ -73,12 +75,14 @@ export class AddCustomerComponent {
   }
 
   carregarCustomer(customer: Customer) {
+    var date = customer.birthDate
+    var newDate = date.split('/').reverse().join('-')
     this.form.patchValue({
       id: customer.id,
       firstName: customer.firstName,
       lastName: customer.lastName,
       cpf: customer.cpf,
-      birthDate: new Date(customer.birthDate),
+      birthDate: newDate,
       monthlyIncome: customer.monthlyIncome,
       status: customer.status,
       email: customer.email,
@@ -91,8 +95,18 @@ export class AddCustomerComponent {
 
   editCustomer(formDirective: FormGroupDirective) {
     this.form.get('password')?.enable()
-    this.customerService.editCustomer(this.form.value).subscribe(() => formDirective.resetForm())
-    this.loadCustomer()
+    const datePipe = new DatePipe('en-US')
+    const customer: Customer = this.form.value
+    customer.birthDate = datePipe.transform(customer.birthDate, 'dd/MM/yyyy')!
+
+    this.customerService.editCustomer(customer).subscribe({
+      complete: () => {
+        formDirective.resetForm()
+        this.form.get('status')?.setValue(true)
+        this.loadCustomer()
+      }
+    })
+    this.editando = false
     alert('Atualizado com sucesso')
   }
 
@@ -100,6 +114,13 @@ export class AddCustomerComponent {
     this.customerService.deleteCustomer(id).subscribe()
     this.loadCustomer()
     alert('Deletado com sucesso')
+  }
+
+  openDialogConfirm(id: number) {
+    this.dialog.open(DialogConfirmComponent, {
+      width: 'auto',
+      data: id,
+    }).afterClosed().subscribe(b => b ? this.loadCustomer() : null)
   }
 
 }

@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from "@angular/material/button";
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from "@angular/material/input";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatTableModule } from '@angular/material/table';
@@ -16,6 +17,7 @@ import { AddCustomerComponent } from './components/add-customer/add-customer.com
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavComponent } from './components/nav/nav.component';
+import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confirm.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { NavComponent } from './components/nav/nav.component';
     NavComponent,
     HomeComponent,
     HeaderComponent,
-    AddCustomerComponent
+    AddCustomerComponent,
+    DialogConfirmComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,8 @@ import { NavComponent } from './components/nav/nav.component';
     MatTableModule,
     FormsModule,
     NgxMaskDirective,
-    NgxMaskPipe
+    NgxMaskPipe,
+    MatDialogModule
   ],
   providers: [provideNgxMask()],
   bootstrap: [AppComponent]
