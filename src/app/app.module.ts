@@ -14,10 +14,12 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AddCustomerComponent } from './components/add-customer/add-customer.component';
+import { CategoryComponent } from './components/category/category.component';
+import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confirm.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavComponent } from './components/nav/nav.component';
-import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confirm.component';
+import { ProductComponent } from './components/product/product.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confi
     HomeComponent,
     HeaderComponent,
     AddCustomerComponent,
-    DialogConfirmComponent
+    DialogConfirmComponent,
+    CategoryComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,

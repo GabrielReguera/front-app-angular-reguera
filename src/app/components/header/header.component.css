@@ -2,6 +2,10 @@
   flex: 1 1 auto;
 }
 
+mat-toolbar{
+  gap: 1rem;
+}
+
 .mat-toolbar {
   background-color: #fff;
 }

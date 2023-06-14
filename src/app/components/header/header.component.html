@@ -1,4 +1,4 @@
-<mat-toolbar>
+<mat-toolbar class="mat-elevation-z4">
     <button (click)="toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
         <i class="material-icons">menu</i>
     </button>
@@ -8,5 +8,15 @@
         aria-label="Example icon-button with heart icon">
         <i class="material-icons">add</i>
         Customer
+    </button>
+    <button routerLink="add-product" mat-raised-button color="primary"
+        aria-label="Example icon-button with heart icon">
+        <i class="material-icons">add</i>
+        Product
+    </button>
+    <button routerLink="add-category" mat-raised-button color="primary"
+        aria-label="Example icon-button with heart icon">
+        <i class="material-icons">add</i>
+        Category
     </button>
 </mat-toolbar>

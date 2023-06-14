@@ -119,7 +119,7 @@ export class AddCustomerComponent {
   openDialogConfirm(id: number) {
     this.dialog.open(DialogConfirmComponent, {
       width: 'auto',
-      data: id,
+      data: { id: id, tipo: 'customer' },
     }).afterClosed().subscribe(b => b ? this.loadCustomer() : null)
   }
 
