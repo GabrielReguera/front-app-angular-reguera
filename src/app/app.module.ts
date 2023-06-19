@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from "@angular/material/button";
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from "@angular/material/input";
+import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -46,7 +47,8 @@ import { ProductComponent } from './components/product/product.component';
     FormsModule,
     NgxMaskDirective,
     NgxMaskPipe,
-    MatDialogModule
+    MatDialogModule,
+    MatSelectModule
   ],
   providers: [provideNgxMask()],
   bootstrap: [AppComponent]

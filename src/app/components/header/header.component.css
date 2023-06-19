@@ -2,10 +2,14 @@
   flex: 1 1 auto;
 }
 
-mat-toolbar{
+mat-toolbar {
   gap: 1rem;
 }
 
 .mat-toolbar {
   background-color: #fff;
+}
+
+.title {
+  cursor: pointer;
 }

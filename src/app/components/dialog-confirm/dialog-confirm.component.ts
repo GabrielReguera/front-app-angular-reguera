@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CategoryService } from 'src/app/services/category.service';
 import { CustomerService } from 'src/app/services/customer.service';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-dialog-confirm',
@@ -13,6 +14,7 @@ export class DialogConfirmComponent {
   constructor(
     private customerService: CustomerService,
     private categoryService: CategoryService,
+    private productService: ProductService,
     @Inject(MAT_DIALOG_DATA) public data: { id: number, tipo: string },
     private matDialog: MatDialogRef<DialogConfirmComponent>) { }
 
@@ -22,6 +24,9 @@ export class DialogConfirmComponent {
       this.matDialog.close(true)
     } else if (this.data.tipo == 'customer') {
       this.customerService.deleteCustomer(this.data.id).subscribe()
+      this.matDialog.close(true)
+    } else if (this.data.tipo == 'product') {
+      this.productService.deleteProduct(this.data.id).subscribe()
       this.matDialog.close(true)
     }
   }

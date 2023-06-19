@@ -1,1 +1,93 @@
-<p>product works!</p>
+<div class="container">
+    <form class="form" [formGroup]="form" #formDirective="ngForm">
+        <mat-form-field class="full-width">
+            <mat-label>Nome: </mat-label>
+            <input type="text" formControlName="nameProduct" matInput placeholder="Digite o nome" />
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label>Descrição: </mat-label>
+            <input type="text" formControlName="descriptionProduct" matInput placeholder="Digite a descrição" />
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label>Custo: </mat-label>
+            <input formControlName="costPriceProduct" matInput placeholder="Digite o preço" />
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label>Preço: </mat-label>
+            <input formControlName="amountProduct" matInput placeholder="Digite o preço" />
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label>Categoria: </mat-label>
+            <mat-select formControlName="category">
+                <mat-option *ngFor="let category of categories | async" [value]="category.id">
+                    {{category.name}} - {{category.description}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <button *ngIf="!editando" type="submit" (click)="saveProduct(formDirective)" mat-raised-button
+            color="primary">Salvar</button>
+        <button *ngIf="editando" type="submit" (click)="editProduct(formDirective)" mat-raised-button
+            color="primary">Editar</button>
+    </form>
+
+    <div class="table">
+        <mat-form-field style="width: 100%;">
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+        </mat-form-field>
+
+        <table mat-table [dataSource]="(dataSource | async)!" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> Id </th>
+                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.nameProduct }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef> Description </th>
+                <td mat-cell *matCellDef="let element"> {{element.descriptionProduct}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="cost">
+                <th mat-header-cell *matHeaderCellDef> Cost </th>
+                <td mat-cell *matCellDef="let element"> {{element.costPriceProduct}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="amount">
+                <th mat-header-cell *matHeaderCellDef> Amout </th>
+                <td mat-cell *matCellDef="let element"> {{element.amountProduct}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="category">
+                <th mat-header-cell *matHeaderCellDef> Category </th>
+                <td mat-cell *matCellDef="let element"> {{element.category.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="acoes">
+                <th mat-header-cell *matHeaderCellDef> Actions </th>
+                <td class="actions" mat-cell *matCellDef="let row">
+                    <button mat-raised-button (click)="carregarProduct(row)" color="primary">
+                        <i class="material-icons">edit</i>
+                    </button>
+                    <button mat-raised-button (click)="openDialogConfirm(row.idProduct)" color="warn">
+                        <i class="material-icons">delete</i>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">Não foi encontrado nada com: "{{input.value}}"</td>
+            </tr>
+        </table>
+    </div>
+
+</div>
