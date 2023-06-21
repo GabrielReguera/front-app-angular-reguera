@@ -75,23 +75,22 @@ export class ProductComponent {
 
   }
 
-  carregarProduct(product: Product) {
-    console.log(product)
+  carregarProduct(product: any) {
     this.form.patchValue({
       idProduct: product.idProduct,
       nameProduct: product.nameProduct,
       descriptionProduct: product.descriptionProduct,
       costPriceProduct: product.costPriceProduct,
       amountProduct: product.amountProduct,
-      category: product.category,
+      category: product.category.id,
     });
 
     this.editando = true
   }
 
   editProduct(formDirective: FormGroupDirective) {
+    if (this.form.invalid) { return }
     const product: Product = this.form.value
-    console.log(product)
     this.productService.editProduct(product).subscribe({
       complete: () => {
         formDirective.resetForm()
